@@ -86,12 +86,12 @@ const UserFlowNode = ({ id, data, selected }: NodeProps<UserFlowNodeData>) => {
           <button 
               onClick={() => addInteractionWidget(id, WidgetType.DECISION)}
                className="group flex-1 py-1.5 flex flex-row items-center justify-center gap-1.5 rounded-md hover:bg-slate-50/50 transition-all"
-              title="添加决策矩阵"
+              title="添加决策点"
           >
               <div className="text-gray-400 group-hover:text-slate-600 transition-colors">
                    <Plus size={12} />
               </div>
-              <span className="text-[10px] font-semibold text-gray-500 group-hover:text-slate-700 uppercase tracking-wider">决策</span>
+              <span className="text-[10px] font-semibold text-gray-500 group-hover:text-slate-700 uppercase tracking-wider">决策点</span>
           </button>
 
           <div className="w-px h-3 bg-gray-200"></div>
@@ -99,7 +99,7 @@ const UserFlowNode = ({ id, data, selected }: NodeProps<UserFlowNodeData>) => {
           <button 
               onClick={() => addInteractionWidget(id, WidgetType.TODO)}
                className="group flex-1 py-1.5 flex flex-row items-center justify-center gap-1.5 rounded-md hover:bg-red-50/50 transition-all"
-               title="添加待办"
+               title="添加待明确"
           >
               <div className="text-gray-400 group-hover:text-red-500 transition-colors">
                    <Plus size={12} />

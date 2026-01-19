@@ -58,10 +58,10 @@ const InsightDashboard: React.FC = () => {
             <div className="p-4 border-b border-gray-200 flex-shrink-0 flex justify-between items-start">
               <div className="flex flex-col justify-center h-full">
                 <h2 className="font-bold text-gray-700 text-sm uppercase tracking-wider flex items-center gap-2 h-7">
-                   记录总览
+                   标记汇总
                 </h2>
                 <p className="text-[10px] text-gray-400 mt-0.5">
-                  {opportunities.length} 机会点 • {decisions.length} 决策 • {todos.filter(t => t.data.status === 'open').length} 待解决
+                  {opportunities.length} 机会点 • {decisions.length} 决策点 • {todos.filter(t => t.data.status === 'open').length} 待明确
                 </p>
               </div>
               
@@ -83,7 +83,7 @@ const InsightDashboard: React.FC = () => {
               <section>
                 <div className="flex items-center gap-2 mb-3 text-yellow-700 font-bold uppercase text-xs tracking-wider sticky top-0 bg-white z-10 py-1">
                   <Lightbulb size={14} />
-                  <h3>机会点列表</h3>
+                  <h3>机会点</h3>
                 </div>
                 <div className="space-y-2">
                   {opportunities.length === 0 && <p className="text-xs text-gray-400 italic">暂无机会点记录。</p>}
@@ -118,7 +118,7 @@ const InsightDashboard: React.FC = () => {
               <section>
                 <div className="flex items-center gap-2 mb-3 text-slate-600 font-bold uppercase text-xs tracking-wider sticky top-0 bg-white z-10 py-1">
                   <Scale size={14} />
-                  <h3>决策记录</h3>
+                  <h3>决策点</h3>
                 </div>
                 <div className="space-y-2">
                   {decisions.length === 0 && <p className="text-xs text-gray-400 italic">暂无决策记录。</p>}
@@ -153,7 +153,7 @@ const InsightDashboard: React.FC = () => {
                 <div className="flex items-center justify-between mb-3 sticky top-0 bg-white z-10 py-1">
                    <div className="flex items-center gap-2 text-red-600 font-bold uppercase text-xs tracking-wider">
                       <CheckSquare size={14} />
-                      <h3>待明确事项</h3>
+                      <h3>待明确</h3>
                    </div>
                    <label className="flex items-center gap-1.5 cursor-pointer hover:bg-gray-50 px-2 py-1 rounded transition-colors group select-none">
                       <div className={`w-3.5 h-3.5 rounded-sm border flex items-center justify-center transition-colors ${showResolved ? 'bg-gray-200 border-gray-200' : 'bg-white border-gray-200'}`}>

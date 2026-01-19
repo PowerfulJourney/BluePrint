@@ -109,7 +109,7 @@ export const DecisionRenderer: React.FC<WidgetProps<DecisionWidget>> = ({ data, 
         icon={<Scale size={16} />}
         colorClass="text-slate-600"
         bgClass="bg-slate-100"
-        title="决策矩阵"
+        title="决策点"
         details={data.title}
         onClick={onToggleCollapse}
       />
@@ -136,7 +136,7 @@ export const DecisionRenderer: React.FC<WidgetProps<DecisionWidget>> = ({ data, 
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2 text-slate-700 font-bold text-xs uppercase tracking-wide cursor-pointer select-none" onClick={onToggleCollapse}>
           <div className="p-1 bg-slate-200 rounded-md"><Scale size={14} /></div>
-          <span>决策矩阵</span>
+          <span>决策点</span>
         </div>
         <div className="flex items-center gap-1">
           <button onClick={onToggleCollapse} className="text-slate-400 hover:text-slate-700 p-1 rounded hover:bg-slate-200 transition-colors">
@@ -239,7 +239,7 @@ export const TodoRenderer: React.FC<WidgetProps<TodoWidget>> = ({ data, onUpdate
                     className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wide cursor-pointer ${isResolved ? 'text-gray-500' : 'text-red-500'}`}
                     onClick={onToggleCollapse}
                 >
-                    <span>待明确事项</span>
+                    <span>待明确</span>
                 </div>
                  <div className="flex items-center gap-1">
                     <button onClick={onToggleCollapse} className="text-gray-400 hover:text-gray-700 p-1 rounded hover:bg-gray-100">
@@ -259,7 +259,7 @@ export const TodoRenderer: React.FC<WidgetProps<TodoWidget>> = ({ data, onUpdate
             />
              {!isResolved && (
                  <div className="flex items-center gap-2 bg-gray-50 p-1 rounded border border-gray-100 w-full">
-                     <span className="text-xs text-gray-400 pl-1 whitespace-nowrap">负责人：</span>
+                     <span className="text-xs text-gray-400 pl-1 whitespace-nowrap">对接人：</span>
                      <input 
                         className="text-xs bg-transparent px-1 py-0.5 rounded border-none focus:outline-none text-gray-600 w-full font-medium min-w-0"
                         placeholder="如：PM、技术负责人"
