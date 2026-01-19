@@ -54,6 +54,16 @@ export interface UserFlowNodeData {
   children: AnalysisWidget[];
 }
 
+// Session/Canvas Metadata
+export interface CanvasSession {
+  id: string;
+  name: string;
+  createdAt: number; // For stable sorting
+  lastModified: number;
+  nodes: any[]; // Using any[] to avoid circular dependency issues, strictly it's Node<UserFlowNodeData>[]
+  edges: any[]; // Edge[]
+}
+
 // Helper type for Zustand
 export interface AppState {
   // Navigation
