@@ -17,7 +17,6 @@ import {
   UserFlowNodeData, 
   WidgetType, 
   OpportunityWidget, 
-  DecisionWidget, 
   TodoWidget 
 } from './types';
 import { v4 as uuidv4 } from 'uuid';

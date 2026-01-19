@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import ReactFlow, { 
   Background, 
   Controls, 
   MiniMap, 
   NodeTypes,
   useReactFlow,
-  ReactFlowProvider
+  ReactFlowProvider,
+  XYPosition
 } from 'reactflow';
 import { useStore } from '../store';
 import UserFlowNode from './UserFlowNode';
@@ -28,7 +29,7 @@ const CanvasInner = () => {
     setFocusTarget
   } = useStore();
 
-  const { setCenter, getNodes, fitView } = useReactFlow();
+  const { setCenter, getNodes, getZoom } = useReactFlow();
 
   // Bi-directional anchoring logic
   useEffect(() => {
@@ -47,6 +48,13 @@ const CanvasInner = () => {
     }
   }, [focusTarget, getNodes, setCenter, setFocusTarget]);
 
+  // Handle MiniMap click to navigate
+  const onMiniMapClick = useCallback((_: React.MouseEvent, position: XYPosition) => {
+    // Keep the current zoom level while panning
+    const currentZoom = getZoom();
+    setCenter(position.x, position.y, { zoom: currentZoom, duration: 600 });
+  }, [setCenter, getZoom]);
+
   return (
     <div className="w-full h-full relative bg-gray-50">
       <ReactFlow
@@ -62,10 +70,11 @@ const CanvasInner = () => {
         <Background gap={20} size={1} color="#e5e7eb" />
         <Controls className="bg-white border border-gray-200 shadow-sm rounded-lg text-gray-600" />
         <MiniMap 
-            className="border border-gray-200 shadow-lg rounded-lg overflow-hidden" 
+            className="border border-gray-200 shadow-lg rounded-lg overflow-hidden cursor-pointer" 
             style={{ width: 120, height: 80 }}
             nodeColor="#f1f5f9"
             maskColor="rgba(240, 242, 245, 0.6)"
+            onClick={onMiniMapClick}
         />
       </ReactFlow>
 

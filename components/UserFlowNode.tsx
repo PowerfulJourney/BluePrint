@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { UserFlowNodeData, WidgetType } from '../types';
 import { useStore } from '../store';
-import { Plus, GripVertical, MoreHorizontal } from 'lucide-react';
+import { Plus, GripVertical } from 'lucide-react';
 import { OpportunityRenderer, DecisionRenderer, TodoRenderer } from './widgets/WidgetRenderers';
 
 const UserFlowNode = ({ id, data, selected }: NodeProps<UserFlowNodeData>) => {
@@ -25,12 +25,6 @@ const UserFlowNode = ({ id, data, selected }: NodeProps<UserFlowNodeData>) => {
         <div className="p-5 pb-1 relative">
           <div className="absolute top-4 right-3 text-gray-300 cursor-grab active:cursor-grabbing opacity-0 group-hover/node:opacity-100 transition-opacity p-1 hover:bg-gray-100 rounded">
               <GripVertical size={16} />
-          </div>
-          
-          {/* Step Indicator (Visual Flourish) */}
-          <div className="mb-2 flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">用户步骤</span>
           </div>
 
           <input 

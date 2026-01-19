@@ -1,6 +1,6 @@
 import React from 'react';
 import { OpportunityWidget, DecisionWidget, TodoWidget } from '../../types';
-import { Lightbulb, Scale, CheckSquare, Trash2, Plus, X, ChevronDown, ChevronUp, Maximize2 } from 'lucide-react';
+import { Lightbulb, Scale, CheckSquare, Trash2, Plus, X, ChevronUp, Maximize2 } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
 
 interface WidgetProps<T> {
@@ -233,7 +233,7 @@ export const TodoRenderer: React.FC<WidgetProps<TodoWidget>> = ({ data, onUpdate
             <CheckSquare size={12} />
         </button>
         
-        <div className="flex-1 space-y-2">
+        <div className="flex-1 space-y-2 w-full min-w-0">
             <div className="flex items-center justify-between">
                 <div 
                     className={`flex items-center gap-2 text-xs font-bold uppercase tracking-wide cursor-pointer ${isResolved ? 'text-gray-500' : 'text-red-500'}`}
@@ -258,10 +258,10 @@ export const TodoRenderer: React.FC<WidgetProps<TodoWidget>> = ({ data, onUpdate
                 onChange={(e) => onUpdate({ description: e.target.value })}
             />
              {!isResolved && (
-                 <div className="flex items-center gap-2 bg-gray-50 p-1 rounded border border-gray-100">
-                     <span className="text-xs text-gray-400 pl-1">负责人：</span>
+                 <div className="flex items-center gap-2 bg-gray-50 p-1 rounded border border-gray-100 w-full">
+                     <span className="text-xs text-gray-400 pl-1 whitespace-nowrap">负责人：</span>
                      <input 
-                        className="text-xs bg-transparent px-1 py-0.5 rounded border-none focus:outline-none text-gray-600 w-full font-medium"
+                        className="text-xs bg-transparent px-1 py-0.5 rounded border-none focus:outline-none text-gray-600 w-full font-medium min-w-0"
                         placeholder="如：PM、技术负责人"
                         value={data.owner}
                         onChange={(e) => onUpdate({ owner: e.target.value })}

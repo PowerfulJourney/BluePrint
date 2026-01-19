@@ -1,7 +1,6 @@
 import React from 'react';
 import Canvas from './components/Canvas';
 import InsightDashboard from './components/InsightDashboard';
-import { Layers } from 'lucide-react';
 
 const App: React.FC = () => {
   return (

@@ -79,9 +79,14 @@ const InsightDashboard: React.FC = () => {
                 {item.data.solution_idea && (
                     <p className="text-xs text-gray-600 mt-1 pl-2 border-l-2 border-yellow-300 line-clamp-2">{item.data.solution_idea}</p>
                 )}
-                <div className="flex justify-between items-center mt-2">
-                    <span className="text-[10px] text-yellow-600 bg-white px-1.5 py-0.5 rounded shadow-sm border border-yellow-100 truncate max-w-[60%]">{item.nodeTitle}</span>
-                    <span className="text-[10px] font-bold text-yellow-800">影响: {item.data.value_score}/5</span>
+                <div className="flex justify-between items-center mt-3 pt-2 border-t border-yellow-100/50">
+                    {/* Unified Source Style: changed from yellow-600/yellow-100 to gray-500/gray-200 */}
+                    <span className="text-[10px] text-gray-500 bg-white px-1.5 py-0.5 rounded shadow-sm border border-gray-200 truncate max-w-[60%]">
+                      来源: {item.nodeTitle}
+                    </span>
+                    <span className="text-[10px] font-bold text-yellow-800 bg-yellow-100/50 px-1.5 py-0.5 rounded">
+                      影响: {item.data.value_score}/5
+                    </span>
                 </div>
               </div>
             ))}
@@ -106,11 +111,17 @@ const InsightDashboard: React.FC = () => {
                     <p className="text-sm font-medium text-gray-800 pr-4">{item.data.title || "未命名决策"}</p>
                     <ExternalLink size={12} className="text-slate-400 opacity-0 group-hover:opacity-100 absolute top-3 right-3" />
                 </div>
-                <p className="text-xs text-gray-500 mt-1">{item.data.options.length} 个备选方案</p>
                 {item.data.reasoning && (
-                     <p className="text-xs text-slate-600 mt-2 italic bg-white p-1.5 rounded border border-slate-100">"{item.data.reasoning}"</p>
+                     <p className="text-xs text-slate-600 mt-2 italic bg-white p-1.5 rounded border border-slate-100 line-clamp-2">"{item.data.reasoning}"</p>
                 )}
-                <div className="mt-2 text-[10px] text-slate-500 text-right">来源: {item.nodeTitle}</div>
+                <div className="flex justify-between items-center mt-3 pt-2 border-t border-slate-100/50">
+                    <span className="text-[10px] text-gray-500 bg-white px-1.5 py-0.5 rounded shadow-sm border border-gray-200 truncate max-w-[60%]">
+                      来源: {item.nodeTitle}
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-medium">
+                      {item.data.options.length} 个方案
+                    </span>
+                </div>
               </div>
             ))}
           </div>
@@ -149,17 +160,23 @@ const InsightDashboard: React.FC = () => {
                 className={`group p-3 rounded-lg cursor-pointer transition-all border border-transparent relative ${item.data.status === 'resolved' ? 'bg-gray-50 opacity-60 grayscale' : 'bg-red-50 hover:bg-red-100 hover:border-red-200'}`}
               >
                  <div className="flex justify-between items-start">
-                    <p className={`text-sm pr-4 ${item.data.status === 'resolved' ? 'line-through text-gray-500' : 'font-medium text-gray-800'}`}>
+                    <p className={`text-sm pr-4 line-clamp-2 ${item.data.status === 'resolved' ? 'line-through text-gray-500' : 'font-medium text-gray-800'}`}>
                         {item.data.description || "未命名事项"}
                     </p>
                     <ExternalLink size={12} className="text-gray-400 opacity-0 group-hover:opacity-100 absolute top-3 right-3" />
                 </div>
-                {item.data.owner && (
-                    <div className="mt-2 inline-block px-1.5 py-0.5 bg-white rounded text-[10px] font-bold text-gray-500 border border-gray-200">
+                
+                <div className="flex justify-between items-center mt-3 pt-2 border-t border-red-100/50">
+                    <span className="text-[10px] text-gray-500 bg-white px-1.5 py-0.5 rounded shadow-sm border border-gray-200 truncate max-w-[60%]">
+                      来源: {item.nodeTitle}
+                    </span>
+                    {item.data.owner && (
+                      // Plain text style for owner
+                      <span className="text-[10px] text-gray-500 font-medium">
                         @{item.data.owner}
-                    </div>
-                )}
-                <div className="mt-1 text-[10px] text-gray-400 text-right">来源: {item.nodeTitle}</div>
+                      </span>
+                    )}
+                </div>
               </div>
             ))}
           </div>
