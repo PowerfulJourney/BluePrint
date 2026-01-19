@@ -1,0 +1,5 @@
+{
+  "name": "UX Analysis Canvas",
+  "description": "一款面向设计师的节点式白板工具，用于梳理用户流程，挂载结构化分析（机会点、决策、待办），并生成可执行的洞察。",
+  "requestFramePermissions": []
+}
