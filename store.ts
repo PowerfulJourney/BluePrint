@@ -17,9 +17,6 @@ import {
   AnalysisWidget, 
   UserFlowNodeData, 
   WidgetType, 
-  OpportunityWidget, 
-  DecisionWidget,
-  TodoWidget,
   CanvasSession
 } from './types';
 import { v4 as uuidv4 } from 'uuid';
