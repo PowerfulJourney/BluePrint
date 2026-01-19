@@ -401,24 +401,33 @@ export const useStore = create<RFState>()(
         
         // Prevent deleting the last session
         if (sessionIds.length <= 1) {
-          alert("至少需要保留一个画布。");
           return;
         }
 
         const newSessions = { ...sessions };
         delete newSessions[sessionId];
 
-        // If deleting the active session, switch to another one
         let newCurrentId = currentSessionId;
-        let newNodes = get().nodes;
-        let newEdges = get().edges;
-
+        
+        // If we deleted the current session, we must switch
+        // If we deleted another session, currentSessionId remains valid
         if (sessionId === currentSessionId) {
           const remainingIds = Object.keys(newSessions);
-          // Try to switch to the most recently modified one, or just the first one
+          // Fallback to the first available session
           newCurrentId = remainingIds[0];
-          newNodes = newSessions[newCurrentId].nodes;
-          newEdges = newSessions[newCurrentId].edges;
+        }
+
+        // Retrieve valid nodes/edges for the next active session
+        const nextSession = newSessions[newCurrentId];
+        let newNodes: Node<UserFlowNodeData>[] = [];
+        let newEdges: Edge[] = [];
+        
+        if (nextSession) {
+            newNodes = nextSession.nodes || [];
+            newEdges = nextSession.edges || [];
+        } else {
+             // Fallback for safety if somehow data is corrupt
+             newNodes = [createDefaultNode()];
         }
 
         set({
@@ -448,17 +457,14 @@ export const useStore = create<RFState>()(
       partialize: (state) => ({ 
         sessions: state.sessions, 
         currentSessionId: state.currentSessionId 
-        // We don't persist 'nodes'/'edges' directly, we hydrate them from sessions on load if needed,
-        // but since we initialize nodes/edges from sessions in the persist callback or initial state,
-        // it's safer to rely on 'sessions' as the source of truth.
       }),
       onRehydrateStorage: () => (state) => {
         // When storage is loaded, sync the active nodes/edges with the currentSessionId
         if (state && state.sessions && state.currentSessionId) {
             const currentSession = state.sessions[state.currentSessionId];
             if (currentSession) {
-                state.nodes = currentSession.nodes;
-                state.edges = currentSession.edges;
+                state.nodes = currentSession.nodes || [];
+                state.edges = currentSession.edges || [];
             }
         }
       }
