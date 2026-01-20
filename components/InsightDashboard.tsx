@@ -16,15 +16,19 @@ const InsightDashboard: React.FC = () => {
     const todosList: { nodeTitle: string; nodeId: string; data: TodoWidget }[] = [];
 
     nodes.forEach(node => {
-      node.data.children.forEach(child => {
-        if (child.type === WidgetType.OPPORTUNITY) {
-          opps.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
-        } else if (child.type === WidgetType.DECISION) {
-          decs.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
-        } else if (child.type === WidgetType.TODO) {
-          todosList.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
-        }
-      });
+      // Safety check: Only UserFlow nodes have children (analysis widgets).
+      // Role nodes and others might not have this property defined.
+      if (node.data && Array.isArray(node.data.children)) {
+        node.data.children.forEach(child => {
+          if (child.type === WidgetType.OPPORTUNITY) {
+            opps.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
+          } else if (child.type === WidgetType.DECISION) {
+            decs.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
+          } else if (child.type === WidgetType.TODO) {
+            todosList.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
+          }
+        });
+      }
     });
 
     return { opportunities: opps, decisions: decs, todos: todosList };
@@ -46,15 +50,13 @@ const InsightDashboard: React.FC = () => {
           <LineChart size={18} className="text-blue-600" />
       </button>
 
-      {/* Main Drawer Panel - using border-box logic more carefully */}
-      {/* Outer container handles the sliding width animation and clipping */}
+      {/* Main Drawer Panel */}
       <div 
           className={`h-full bg-white border-l border-gray-200 shadow-xl z-20 transition-all duration-300 ease-out flex flex-col overflow-hidden ${isOpen ? 'w-80' : 'w-0'}`}
       >
-        {/* Inner container with FIXED width to prevent text reflow during slide */}
         <div className="w-80 flex-shrink-0 flex flex-col h-full bg-white">
             
-            {/* Header - Styled to match Sidebar header */}
+            {/* Header */}
             <div className="p-4 border-b border-gray-200 flex-shrink-0 flex justify-between items-start">
               <div className="flex flex-col justify-center h-full">
                 <h2 className="font-bold text-gray-700 text-sm uppercase tracking-wider flex items-center gap-2 h-7">
@@ -65,7 +67,6 @@ const InsightDashboard: React.FC = () => {
                 </p>
               </div>
               
-              {/* Close Button inside Header */}
               <button 
                 onClick={() => setIsOpen(false)}
                 className="flex-shrink-0 text-gray-400 hover:text-gray-700 hover:bg-gray-100 p-1 rounded transition-colors"
@@ -76,7 +77,6 @@ const InsightDashboard: React.FC = () => {
             </div>
 
             {/* Content Scroll Area */}
-            {/* Using w-full to fill the 80 container */}
             <div className="flex-1 overflow-y-auto p-4 space-y-6 w-full">
               
               {/* Opportunities Section */}
@@ -101,7 +101,6 @@ const InsightDashboard: React.FC = () => {
                           <p className="text-xs text-gray-600 mt-1 pl-2 border-l-2 border-yellow-300 line-clamp-2">{item.data.solution_idea}</p>
                       )}
                       <div className="flex justify-between items-center mt-3 pt-2 border-t border-yellow-100/50">
-                          {/* Unified Source Style */}
                           <span className="text-[10px] text-gray-500 bg-white px-1.5 py-0.5 rounded shadow-sm border border-gray-200 truncate max-w-[60%]">
                             来源: {item.nodeTitle}
                           </span>

@@ -1,3 +1,4 @@
+
 // Define the specific types of analysis widgets
 
 export enum WidgetType {
@@ -47,11 +48,17 @@ export interface TodoWidget {
 // Union type for all children
 export type AnalysisWidget = OpportunityWidget | DecisionWidget | TodoWidget;
 
-// Data structure for the React Flow Node
+// Data structure for the React Flow Node (Step)
 export interface UserFlowNodeData {
   title: string;
   description: string;
   children: AnalysisWidget[];
+}
+
+// Data structure for the Role Node
+export interface RoleNodeData {
+  title: string;
+  description: string;
 }
 
 // Session/Canvas Metadata
@@ -60,7 +67,7 @@ export interface CanvasSession {
   name: string;
   createdAt: number; // For stable sorting
   lastModified: number;
-  nodes: any[]; // Using any[] to avoid circular dependency issues, strictly it's Node<UserFlowNodeData>[]
+  nodes: any[]; // Using any[] to avoid circular dependency issues
   edges: any[]; // Edge[]
 }
 
