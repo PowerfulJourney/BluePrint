@@ -200,7 +200,7 @@ export const useStore = create<RFState>()(
           if (node.id === nodeId && node.type === 'userFlow') {
             return {
               ...node,
-              data: { ...node.data, children: node.data.children.map(w => w.id === widgetId ? { ...w, ...data } as AnalysisWidget : w) }
+              data: { ...node.data, children: node.data.children.map((w: AnalysisWidget) => w.id === widgetId ? { ...w, ...data } as AnalysisWidget : w) }
             };
           }
           return node;
@@ -219,7 +219,7 @@ export const useStore = create<RFState>()(
           if (node.id === nodeId && node.type === 'userFlow') {
             return {
               ...node,
-              data: { ...node.data, children: node.data.children.map(w => w.id === widgetId ? { ...w, isCollapsed: !w.isCollapsed } as AnalysisWidget : w) }
+              data: { ...node.data, children: node.data.children.map((w: AnalysisWidget) => w.id === widgetId ? { ...w, isCollapsed: !w.isCollapsed } as AnalysisWidget : w) }
             };
           }
           return node;
@@ -236,7 +236,7 @@ export const useStore = create<RFState>()(
       removeWidget: (nodeId, widgetId) => {
         const newNodes = get().nodes.map((node) => {
           if (node.id === nodeId && node.type === 'userFlow') {
-            return { ...node, data: { ...node.data, children: node.data.children.filter(w => w.id !== widgetId) } };
+            return { ...node, data: { ...node.data, children: node.data.children.filter((w: AnalysisWidget) => w.id !== widgetId) } };
           }
           return node;
         });

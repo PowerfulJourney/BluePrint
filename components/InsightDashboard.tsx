@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useStore } from '../store';
-import { WidgetType, OpportunityWidget, DecisionWidget, TodoWidget } from '../types';
+import { WidgetType, OpportunityWidget, DecisionWidget, TodoWidget, AnalysisWidget } from '../types';
 import { Lightbulb, Scale, CheckSquare, ExternalLink, Check, ChevronsRight, LineChart } from 'lucide-react';
 
 const InsightDashboard: React.FC = () => {
@@ -19,7 +19,7 @@ const InsightDashboard: React.FC = () => {
       // Safety check: Only UserFlow nodes have children (analysis widgets).
       // Role nodes and others might not have this property defined.
       if (node.data && Array.isArray(node.data.children)) {
-        node.data.children.forEach(child => {
+        node.data.children.forEach((child: AnalysisWidget) => {
           if (child.type === WidgetType.OPPORTUNITY) {
             opps.push({ nodeTitle: node.data.title, nodeId: node.id, data: child });
           } else if (child.type === WidgetType.DECISION) {
