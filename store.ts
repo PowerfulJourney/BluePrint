@@ -50,7 +50,7 @@ const createDefaultNode = (): Node<UserFlowNodeData> => ({
   id: uuidv4(),
   type: 'userFlow',
   position: { x: 250, y: 100 },
-  data: { title: '起始步骤', description: '在此处描述用户行为...', children: [] },
+  data: { title: '', description: '', children: [] },
 });
 
 const DEFAULT_SESSION_ID = 'default-session';
@@ -112,7 +112,7 @@ export const useStore = create<RFState>()(
           id: uuidv4(),
           type: 'userFlow',
           position,
-          data: { title: '新步骤', description: '', children: [] }
+          data: { title: '', description: '', children: [] }
         };
         const newNodes = [...get().nodes, newNode];
         set((state) => ({ 
@@ -129,7 +129,7 @@ export const useStore = create<RFState>()(
           id: uuidv4(),
           type: 'role',
           position,
-          data: { title: '新角色', description: '描述角色职责或画像...' }
+          data: { title: '', description: '' }
         };
         const newNodes = [...get().nodes, newNode];
         set((state) => ({ 
@@ -171,7 +171,7 @@ export const useStore = create<RFState>()(
             newWidget = { id, type: WidgetType.OPPORTUNITY, problem: '', solution_idea: '', value_score: 3, isCollapsed: false };
             break;
           case WidgetType.DECISION:
-            newWidget = { id, type: WidgetType.DECISION, title: '设计决策', options: [], final_decision: '', reasoning: '', isCollapsed: false };
+            newWidget = { id, type: WidgetType.DECISION, title: '', options: [], final_decision: '', reasoning: '', isCollapsed: false };
             break;
           case WidgetType.TODO:
             newWidget = { id, type: WidgetType.TODO, description: '', owner: '', status: 'open', isCollapsed: false };

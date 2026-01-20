@@ -1,3 +1,4 @@
+
 import { memo } from 'react';
 import { Handle, Position, NodeProps } from 'reactflow';
 import { RoleNodeData } from '../types';
@@ -24,7 +25,7 @@ const RoleNode = ({ id, data, selected }: NodeProps<RoleNodeData>) => {
             </div>
             <input 
               className="w-full bg-transparent text-lg font-bold text-gray-900 placeholder:text-indigo-200 focus:outline-none border-none transition-colors"
-              placeholder="角色名称 (如：初级用户)"
+              placeholder="角色名称"
               value={data.title}
               onChange={(e) => updateNodeTitle(id, e.target.value)}
             />
